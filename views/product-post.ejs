@@ -40,26 +40,15 @@
     .product {
       margin-bottom: 20px;
     }
+
+    .small-text {
+      font-size: 14px; /* Kies hier de gewenste kleinere lettergrootte */
+    }
   </style>
 </head>
 <body>
   <!-- Navigatiebalk -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/product-post">Add Product</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <%- include('header', { title: 'Producten' }) %>
 
   <div class="container">
     <h1 class="mt-4 text-center">Add Product</h1>
@@ -85,13 +74,86 @@
         <input type="file" class="form-control" name="foto" accept="image/*" required>
       </div>
 
-      <button type="submit" class="btn btn-primary">Voeg product toe</button>
+      <div class="form-group">
+        <label class="form-label" for="category">Category:</label>
+        <select class="form-control" name="category" required>
+          <% categories.forEach(category => { %>
+            <option value="<%= category.id %>"><%= category.naam %></option>
+          <% }); %>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">New Product</button>
     </form>
-  </div>
+
+      <!-- Add Category Form -->
+      <div class="mt-5 text-center"> <!-- Center the forms -->
+        <form id="category-form" class="form-label" action="/add-category" method="POST">
+          <div class="form-group d-inline-block">
+            <label class="form-label" for="newCategory">New Category:</label>
+            <input type="text" class="form-control" name="newCategory" required>
+          </div>
+    
+          <button type="submit" class="btn btn-primary">Add Category</button>
+        </form>
+      </div>
+
+       <!-- Delete Category Form -->
+       <div class="mt-5 text-center">
+        <form action="/delete-category" method="POST" class="form-label">
+          <div class="form-group d-inline-block">
+            <label class="form-label" for="deleteCategory">Delete Category:</label>
+            <select  class="form-control small-text" name="deleteCategory" required>
+              <option value="" disabled selected>Select Category</option>
+              <% categories.forEach(category => { %>
+                <option value="<%= category.id %>"><%= category.naam %></option>
+              <% }); %>
+            </select>
+          </div>
+          <div class="form-group d-inline-block">
+            <button type="submit" class="btn btn-danger mt-2">Delete Category</button>
+          </div>
+        </form>
+        <div id="delete-category-message" class="text-danger"></div>
+      </div>
 
   <!-- Bootstrap JavaScript en jQuery (vereist voor de navbar-toggle) -->
+
+
+  <!-- Code werkt niet -->
+  <script>
+    function deleteCategory() {
+      // Haal geselecteerde categorie op
+      var selectedCategory = document.getElementById('deleteCategory').value;
+  
+      // Stuur een AJAX-verzoek naar de server om te controleren op gekoppelde producten
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/check-linked-products', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+  
+          // Controleer het antwoord en toon de melding
+          var messageElement = document.getElementById('delete-category-message');
+          if (response.error) {
+            messageElement.textContent = response.error;
+          } else {
+            // Geen gekoppelde producten, submit het formulier
+            document.getElementById('delete-category-form').submit();
+          }
+        }
+      };
+  
+      // Stuur de geselecteerde categorie naar de server
+      xhr.send(JSON.stringify({ deleteCategory: selectedCategory }));
+    }
+  </script>
+
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
 </body>
 </html>

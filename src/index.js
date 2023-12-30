@@ -19,6 +19,11 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', routes);
 
+// Product-post page at localhost:3000/product-post
+app.get('/product-post', (req, res) => {
+  res.render('product-post');
+});
+
 // Productenpagina op localhost:3000
 app.get('/', (req, res) => {
   res.render('product');

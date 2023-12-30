@@ -39,22 +39,7 @@
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/product-post">Add Product</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <%- include('header', { title: 'Producten' }) %>
 
   <div class="container">
     <h1 class="mt-5 text-center">Update Product</h1>
@@ -77,11 +62,22 @@
 
       <div class="form-group">
         <label class="form-label" for="foto">Foto:</label>
-        <input type="file" class="form-control" name="foto" accept="image/*">
+        <input type="file" class="form-control" name="foto" value="<%= product.foto %>" accept="image/*">
       </div>
+
+      <div class="form-group">
+        <label class="form-label" for="category">Category:</label>
+        <select class="form-control" name="category" required>
+          <% categories.forEach(category => { %>
+            <option value="<%= category.id %>" <%= (category.id === product.category_id) ? 'selected' : '' %>><%= category.naam %></option>
+          <% }); %>
+        </select>
+      </div>
+      
 
       <button type="submit" class="btn btn-primary">Update product</button>
     </form>
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

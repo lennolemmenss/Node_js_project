@@ -33,47 +33,55 @@
       transform: scale(1.05);
     }
 
+    #categoryFilterForm label {
+    font-size: 14px; /* Aangepaste tekstgrootte */
+    margin-right: 5px; /* Ruimte toevoegen aan de rechterkant van de tekst */
+    }
 
 
   </style>
 </head>
 <body>
   <!-- Navigatiebalk -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/product-post">Add Product</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <%- include('header', { title: 'Producten' }) %>
+
+  <% function getCategoryName(categoryId) { %>
+    <% const category = categories.find(c => c.id === categoryId); %>
+    <% return category ? category.naam : 'Uncategorized'; %>
+  <% } %>
 
   <div class="container">
-    <h1  class="mt-5 display-4">Keyboards</h1> <!-- Voeg de Bootstrap "display-4" klasse toe voor een grote titel -->
-    <div id="products" class="d-flex flex-wrap">
-      <% products.forEach(product => { %>
-        <div class="card" style="width: 18rem;">
-          <img src="/uploads/<%= product.foto %>" class="card-img-top" alt="<%= product.naam %>">
-          <div class="card-body">
-            <h5 class="card-title"><%= product.naam %></h5>
-            <p class="card-text">Merk: <%= product.merk %></p>
-            <p class="card-text">Prijs: €<%= product.prijs %></p>
+    <h1 class="mt-5 display-4">Keyboards</h1>
 
-            <form action="update-product/<%= product.id %>" method="GET">
-              <button type="submit" class="btn btn-primary">Update product</button>
-            </form>
-            <br>
-            <form action="delete-product/<%= product.id %>" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?')">
-              <button type="submit" class="btn btn-danger">Delete product</button>
-            </form>
+    <!-- Voeg een selectieformulier toe voor categorieën -->
+    <form id="categoryFilterForm">
+      <label for="categoryFilter">Filter op categorie:</label>
+      <select id="categoryFilter" class="form-control" onchange="filterProducts()">
+        <option value="all">Alle categorieën</option>
+        <% categories.forEach(category => { %>
+          <option value="<%= category.id %>"><%= category.naam %></option>
+        <% }); %>
+      </select>
+    </form>
+
+    <div id="products" class="row">
+      <% products.forEach(product => { %>
+        <div class="col-md-4 mb-4 category-<%= product.category_id %>">
+          <div class="card">
+            <img src="/uploads/<%= product.foto %>" class="card-img-top" alt="<%= product.naam %>">
+            <div class="card-body">
+              <h5 class="card-title"><%= product.naam %></h5>
+              <p class="card-text">Merk: <%= product.merk %></p>
+              <p class="card-text">Prijs: €<%= product.prijs %></p>
+              <p class="card-text">Category: <%= getCategoryName(product.category_id) %></p>
+              <form action="update-product/<%= product.id %>" method="GET">
+                <button type="submit" class="btn btn-primary">Update product</button>
+              </form>
+              <br>
+              <form action="delete-product/<%= product.id %>" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?')">
+                <button type="submit" class="btn btn-danger">Delete product</button>
+              </form>
+            </div>
           </div>
         </div>
       <% }); %>
@@ -84,5 +92,29 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    function filterProducts() {
+      var selectedCategory = document.getElementById('categoryFilter').value;
+
+      // Verberg alle producten
+      var products = document.querySelectorAll('#products .col-md-4');
+      products.forEach(product => {
+        product.style.display = 'none';
+      });
+
+      // Toon alleen producten van de geselecteerde categorie of toon alle producten als "Alle categorieën" is geselecteerd
+      if (selectedCategory === 'all') {
+        products.forEach(product => {
+          product.style.display = 'block';
+        });
+      } else {
+        var filteredProducts = document.querySelectorAll(`#products .category-${selectedCategory}`);
+        filteredProducts.forEach(product => {
+          product.style.display = 'block';
+        });
+      }
+    }
+  </script>
 </body>
 </html>
