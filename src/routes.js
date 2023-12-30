@@ -1,3 +1,4 @@
+
 // src/routes.js
 const express = require('express');
 const router = express.Router();
@@ -16,7 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Route voor het toevoegen van een product
+// Route voor het toevoegen van een product op localhost:3000
 router.post('/add-product', upload.single('foto'), (req, res) => {
   const { naam, prijs, merk } = req.body;
   const foto = req.file.filename;
@@ -32,13 +33,13 @@ router.post('/add-product', upload.single('foto'), (req, res) => {
       }
 
       // Na succesvolle toevoeging, redirect naar de productenpagina
-      res.redirect('/api/products');
+      res.redirect('/');
     }
   );
 });
 
-
-router.get('/products', (req, res) => {
+// Route voor het ophalen en weergeven van producten op localhost:3000
+router.get('/', (req, res) => {
   db.query('SELECT * FROM producten', (err, result) => {
     if (err) {
       console.error('Error fetching products:', err);
@@ -46,16 +47,12 @@ router.get('/products', (req, res) => {
       return;
     }
 
-    // Render de products.ejs view en geef de producten door als variabele
+    // Render de product.ejs view en geef de producten door als variabele
     res.render('product', { products: result });
   });
 });
 
-
-
-
-
-// Toevoegen van de delete-product route
+// Toevoegen van de delete-product route op localhost:3000
 router.post('/delete-product/:id', (req, res) => {
   const productId = req.params.id;
 
@@ -67,14 +64,31 @@ router.post('/delete-product/:id', (req, res) => {
     }
 
     // Na succesvolle verwijdering, redirect naar de productenpagina
-    res.redirect('/api/products');
+    res.redirect('/');
+  });
+});
+
+
+router.get('/update-product/:id', (req, res) => {
+  const productId = req.params.id;
+  // Haal het product op basis van productId op uit de database
+  db.query('SELECT * FROM producten WHERE id = ?', [productId], (err, result) => {
+    if (err) {
+      console.error('Error fetching product for update:', err);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+
+    // Render de product-update.ejs view en geef het product door als variabele
+    res.render('product-update', { product: result[0] });
   });
 });
 
 
 
-module.exports = router;
+// Je kunt de overige routes behouden zoals ze zijn
 
+module.exports = router;
 
 
 

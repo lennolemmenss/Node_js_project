@@ -6,17 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Producten</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
   <style>
     body {
       background-color: #f8f9fa;
+      font-family: 'Montserrat', sans-serif; /* Gebruik het Google Font */
     }
     .container {
       padding-top: 50px;
+      text-align: center; /* Centreer de inhoud van de container */
+      /* margin: 50px auto; Voeg marge toe rondom de container */
+      /* margin-top: 50px; */
     }
     #products {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
+      margin-top: 80px; /* Voeg meer marge toe tussen de titel en de producten */
     }
     .card {
       margin: 10px;
@@ -26,11 +32,32 @@
     .card:hover {
       transform: scale(1.05);
     }
+
+
+
   </style>
 </head>
 <body>
+  <!-- Navigatiebalk -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/product-post">Add Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="container">
-    <h1 class="mt-5">Keyboards</h1>
+    <h1  class="mt-5 display-4">Keyboards</h1> <!-- Voeg de Bootstrap "display-4" klasse toe voor een grote titel -->
     <div id="products" class="d-flex flex-wrap">
       <% products.forEach(product => { %>
         <div class="card" style="width: 18rem;">
@@ -39,13 +66,23 @@
             <h5 class="card-title"><%= product.naam %></h5>
             <p class="card-text">Merk: <%= product.merk %></p>
             <p class="card-text">Prijs: €<%= product.prijs %></p>
-            <form action="/api/delete-product/<%= product.id %>" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?')">
-              <button type="submit" class="btn btn-danger">Verwijder product</button>
+
+            <form action="update-product/<%= product.id %>" method="GET">
+              <button type="submit" class="btn btn-primary">Update product</button>
+            </form>
+            <br>
+            <form action="delete-product/<%= product.id %>" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?')">
+              <button type="submit" class="btn btn-danger">Delete product</button>
             </form>
           </div>
         </div>
       <% }); %>
     </div>
   </div>
+
+  <!-- Bootstrap JavaScript en jQuery (vereist voor de navbar-toggle) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

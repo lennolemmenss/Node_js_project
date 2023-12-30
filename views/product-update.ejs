@@ -1,0 +1,91 @@
+<!-- views/product-update.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Product</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .container {
+      padding-top: 50px;
+    }
+    #product-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      font-size: 18px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .btn-primary {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/product-post">Add Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="mt-5 text-center">Update Product</h1>
+
+    <form id="product-form" action="/update-product/<%= product.id %>" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label class="form-label" for="naam">Naam:</label>
+        <input type="text" class="form-control" name="naam" value="<%= product.naam %>" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="prijs">Prijs:</label>
+        <input type="number" class="form-control" name="prijs" value="<%= product.prijs %>" step="0.01" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="merk">Merk:</label>
+        <input type="text" class="form-control" name="merk" value="<%= product.merk %>" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="foto">Foto:</label>
+        <input type="file" class="form-control" name="foto" accept="image/*">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Update product</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
