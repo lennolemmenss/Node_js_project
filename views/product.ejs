@@ -1,0 +1,51 @@
+<!-- views/products.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Producten</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      padding-top: 50px;
+    }
+    #products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .card {
+      margin: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease-in-out;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-5">Keyboards</h1>
+    <div id="products" class="d-flex flex-wrap">
+      <% products.forEach(product => { %>
+        <div class="card" style="width: 18rem;">
+          <img src="/uploads/<%= product.foto %>" class="card-img-top" alt="<%= product.naam %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= product.naam %></h5>
+            <p class="card-text">Merk: <%= product.merk %></p>
+            <p class="card-text">Prijs: €<%= product.prijs %></p>
+            <form action="/api/delete-product/<%= product.id %>" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?')">
+              <button type="submit" class="btn btn-danger">Verwijder product</button>
+            </form>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</body>
+</html>
