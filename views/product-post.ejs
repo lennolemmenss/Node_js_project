@@ -7,8 +7,10 @@
   <title>Producten</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+  <link rel="stylesheet" href="/css/main.css">
+
   <style>
-    body {
+    /* body {
       background-color: #f8f9fa;
       font-family: 'Montserrat', sans-serif;
     }
@@ -42,11 +44,13 @@
     }
 
     .small-text {
-      font-size: 14px; /* Kies hier de gewenste kleinere lettergrootte */
-    }
+      font-size: 14px; /* Kies hier de gewenste kleinere lettergrootte 
+    } */
+    
+    
   </style>
 </head>
-<body>
+<body class="bg-light">
   <!-- Navigatiebalk -->
   <%- include('header', { title: 'Producten' }) %>
 
@@ -83,7 +87,7 @@
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary">New Product</button>
+      <button type="submit" class="btn btn-primary">Add Product</button>
     </form>
 
       <!-- Add Category Form -->
