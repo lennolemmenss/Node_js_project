@@ -1,0 +1,76 @@
+<!-- views/about.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sources</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <link rel="stylesheet" href="/styles/main.css">
+
+    <style>
+        .source-list h2 {
+            font-size: 1.25rem; /* Smaller titles */
+        }
+        .source-list ul {
+            margin-bottom: 2rem; /* Increased margin between links */
+        }
+        .source-list ul li a {
+            display: block; /* Make the link block-level for margin to take effect */
+            margin-bottom: 0.5rem; /* Margin between links */
+        }
+    </style>
+
+
+</head>    
+<body class="bg-light">
+    <!-- Navigatiebalk -->
+    <%- include('header', { title: 'Producten' }) %>
+
+    
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Source References</h1>
+    
+     <section id="youtube-videos" class="source-list">
+          <h2>YouTube Videos</h2>
+          <ul>
+            <li><a href="https://youtu.be/f2EqECiTBL8" target="_blank">Intro to Node.js - LearnCode.academy</a></li>
+            <li><a href="https://youtu.be/NOzi4wBHn0o" target="_blank">Node.js Tutorial for Beginners: Learn Node in 1 Hour | Mosh</a></li>
+            <li><a href="https://www.youtube.com/watch?v=B0ENCKzzFjk" target="_blank">Node.js Crash Course</a></li>
+            <li><a href="https://www.youtube.com/watch?v=Hej48pi_lOc" target="_blank">Express.js</a></li>
+        </section>
+
+        
+        <section id="websites" class="source-list">
+            <h2>Websites and Articles</h2>
+            <ul>
+              <li><a href="https://www.w3schools.com/nodejs/" target="_blank">W3Schools Node.js Tutorials</a></li>
+              <li><a href="https://www.w3schools.com/nodejs/nodejs_mysql.asp" target="_blank">Node.js MySQL Integration</a></li>
+              <li><a href="https://expressjs.com/" target="_blank">Express.js Official Website</a></li>
+              <li><a href="https://expressjs.com/en/guide/routing.html" target="_blank">Express.js Routing Guide</a></li>
+              <li><a href="https://ejs.co/" target="_blank">EJS Template Engine Official Website</a></li>
+              <li><a href="https://www.geeksforgeeks.org/use-ejs-as-template-engine-in-node-js/" target="_blank">GeeksforGeeks - EJS Template Engine in Node.js</a></li>
+              <li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-ejs-to-template-your-node-application" target="_blank">DigitalOcean - How to Use EJS to Template Your Node Application</a></li>
+              <li><a href="https://medium.com/swlh/master-ejs-template-engine-with-node-js-and-expressjs-979cc22b69be" target="_blank">Master EJS Template Engine with Node.js and Express.js - Medium</a></li>
+              <li><a href="https://javascript.plainenglish.io/how-to-use-embedded-javascript-ejs-as-a-template-engine-in-nodejs-full-explanation-80f0d3b92fed" target="_blank">How to Use Embedded JavaScript (EJS) as a Template Engine in Node.js</a></li>
+              <li><a href="https://getbootstrap.com/" target="_blank">Bootstrap - The most popular HTML, CSS, and JS library</a></li>
+            </ul>
+          </section>
+          
+          <section id="seeders" class="source-list">
+            <h2>Seeders</h2>
+            <ul>
+              <li><a href="https://www.wired.com/gallery/best-keyboards/" target="_blank">Wired: Best Keyboards</a></li>
+              <!-- Additional seeders or other categories as needed -->
+            </ul>
+          </section>
+    </div>
+
+                
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

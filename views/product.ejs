@@ -53,9 +53,9 @@
 
     <!-- Filter voor categorieën -->
     <form id="categoryFilterForm">
-      <label for="categoryFilter">Filter op categorie:</label>
+      <label for="categoryFilter">Filter on category:</label>
       <select id="categoryFilter" class="form-control" onchange="filterProducts()">
-        <option value="all">Alle categorieën</option>
+        <option value="all">All categories</option>
         <% categories.forEach(category => { %>
           <option value="<%= category.id %>"><%= category.naam %></option>
         <% }); %>
@@ -69,14 +69,14 @@
             <img src="/uploads/<%= product.foto %>" class="card-img-top" alt="<%= product.naam %>">
             <div class="card-body">
               <h5 class="card-title"><%= product.naam %></h5>
-              <p class="card-text">Merk: <%= product.merk %></p>
-              <p class="card-text">Prijs: €<%= product.prijs %></p>
+              <p class="card-text">Brand: <%= product.merk %></p>
+              <p class="card-text">Price: €<%= product.prijs %></p>
               <p class="card-text">Category: <%= getCategoryName(product.category_id) %></p>
               <form action="update-product/<%= product.id %>" method="GET">
                 <button type="submit" class="btn btn-primary">Update product</button>
               </form>
               <br>
-              <form action="delete-product/<%= product.id %>" method="POST" onsubmit="return confirm('Weet je zeker dat je dit product wilt verwijderen?')">
+              <form action="delete-product/<%= product.id %>" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?')">
                 <button type="submit" class="btn btn-danger">Delete product</button>
               </form>
             </div>

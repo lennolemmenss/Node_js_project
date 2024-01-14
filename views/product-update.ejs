@@ -17,22 +17,22 @@
 
     <form id="product-form" action="/update-product/<%= product.id %>" method="POST" enctype="multipart/form-data">
       <div class="form-group">
-        <label class="form-label" for="naam">Naam:</label>
+        <label class="form-label" for="naam">Name:</label>
         <input type="text" class="form-control" name="naam" value="<%= product.naam %>" required>
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="prijs">Prijs:</label>
+        <label class="form-label" for="prijs">Price:</label>
         <input type="number" class="form-control" name="prijs" value="<%= product.prijs %>" step="0.01" required>
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="merk">Merk:</label>
+        <label class="form-label" for="merk">Brand:</label>
         <input type="text" class="form-control" name="merk" value="<%= product.merk %>" required>
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="foto">Foto:</label>
+        <label class="form-label" for="foto">Photo:</label>
         <input type="file" class="form-control" name="foto" value="<%= product.foto %>" accept="image/*">
       </div>
 
