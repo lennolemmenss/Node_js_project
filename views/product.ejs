@@ -88,7 +88,7 @@
     </div>
   </div>
 
-  <!-- Bootstrap JavaScript en jQuery (vereist voor de navbar-toggle) -->
+ 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -103,7 +103,7 @@
         product.style.display = 'none';
       });
 
-      // Toon alleen producten van de geselecteerde categorie of toon alle producten als "Alle categorieën" is geselecteerd
+      // Toon alleen producten van de geselecteerde categorie
       if (selectedCategory === 'all') {
         products.forEach(product => {
           product.style.display = 'block';

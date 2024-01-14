@@ -92,7 +92,7 @@ router.post('/delete-product/:id', (req, res) => {
   });
 });
 
-// Route voor het weergeven van het update-product formulier
+//Route voor het weergeven van het update-product formulier
 router.get('/update-product/:id', (req, res) => {
   const productId = req.params.id;
 
@@ -118,16 +118,36 @@ router.get('/update-product/:id', (req, res) => {
   });
 });
 
-// Route for processing the update-product form
+
+
 router.post('/update-product/:id', upload.single('foto'), (req, res) => {
   const productId = req.params.id;
   const { naam, prijs, merk, category } = req.body;
-  const foto = req.file ? req.file.filename : null;
+  let foto = req.file ? req.file.filename : null;
 
-  // Execute the update query based on the submitted data
+  // Controleer of er een nieuwe foto is geüpload
+  if (!foto) {
+    // Als er geen nieuwe foto is, haal de oude foto uit de database
+    db.query('SELECT foto FROM producten WHERE id = ?', [productId], (err, result) => {
+      if (err) {
+        console.error('Error fetching product:', err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+
+      foto = result[0].foto; // Gebruik de oude foto
+      updateProduct(productId, naam, prijs, merk, foto, category, res);
+    });
+  } else {
+    // Als er een nieuwe foto is, gebruik deze
+    updateProduct(productId, naam, prijs, merk, foto, category, res);
+  }
+});
+
+function updateProduct(id, naam, prijs, merk, foto, category, res) {
   db.query(
     'UPDATE producten SET naam = ?, prijs = ?, merk = ?, foto = ?, category_id = ? WHERE id = ?',
-    [naam, prijs, merk, foto, category, productId],
+    [naam, prijs, merk, foto, category, id],
     (err, result) => {
       if (err) {
         console.error('Error updating product:', err);
@@ -135,11 +155,10 @@ router.post('/update-product/:id', upload.single('foto'), (req, res) => {
         return;
       }
 
-      // After a successful update, redirect to the products page or another desired page
       res.redirect('/');
     }
   );
-});
+}
 
 
 
