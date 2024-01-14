@@ -39,4 +39,3 @@ Dit Node.js-project is een webapplicatie die basisfunctionaliteiten demonstreert
 
 The code in this project is licensed under [LENNO-LEMMENS].
 
-Remember to replace the placeholders (e.g., `[LICENSE-YOU-CHOOSE]`) with your actual data. Also, ensure you explain any steps that might not be immediately obvious to users who are unfamiliar with your project or with Node.js applications in general. If there are additional scripts or environmental variables needed, make sure to include those details as well.
