@@ -1,10 +1,10 @@
 
-// db.js
+// db.js 
+
 const mysql = require('mysql');
 
 
-
-// aanpassen naar eigen gewenste database 
+// Aanpassen naar eigen gewenste database 
 const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',

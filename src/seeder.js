@@ -38,7 +38,7 @@ const products = [
   { name: 'Ultimate Hacking Keyboard', price: 275.00, brand: 'UHK', photo: 'UltimateHackingKeyboard.jpg', categoryName: 'Split board' }
 ];
 
-
+// Gebruik van Promises, eerst categorieën seeden, daarna prodcucten.
 
 const seedCategories = () => {
   return new Promise((resolve, reject) => {
@@ -65,7 +65,9 @@ const seedProducts = () => {
   return new Promise((resolve, reject) => {
     let completed = 0;
     products.forEach(product => {
-      // First, fetch the category ID for the given category name
+  
+    
+      // Id zoeken van de category
       let categoryQuery = 'SELECT id FROM categories WHERE naam = ?';
       db.query(categoryQuery, [product.categoryName], (categoryErr, categoryResult) => {
         if (categoryErr) {
@@ -82,7 +84,7 @@ const seedProducts = () => {
 
         let categoryId = categoryResult[0].id;
 
-        // Now, insert the product with the retrieved category ID
+      
         let productQuery = 'INSERT INTO producten (naam, prijs, merk, foto, category_id) VALUES (?, ?, ?, ?, ?)';
         db.query(productQuery, [product.name, product.price, product.brand, product.photo, categoryId], (productErr, productResult) => {
           if (productErr) {
@@ -101,7 +103,7 @@ const seedProducts = () => {
   });
 };
 
-
+// Eerst categorieën seeden, daarna producten.
 seedCategories()
   .then(seedProducts)
   .then(() => {

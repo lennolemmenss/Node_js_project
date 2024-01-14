@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
       return;
     }
 
-    // Fetch categories for dropdown
+    // Fetchen van categorieën voor dropdown
     db.query('SELECT * FROM categories', (err, categories) => {
       if (err) {
         console.error('Error fetching categories:', err);
@@ -34,14 +34,14 @@ router.get('/', (req, res) => {
         return;
       }
 
-      // Render the product.ejs view and pass the products and categories as variables
+      
       res.render('product', { products: result, categories });
     });
   });
 });
 
 
-// Route voor het toevoegen van een product op localhost:3000
+// Route voor het toevoegen van een product
 router.post('/add-product', upload.single('foto'), (req, res) => {
   const { naam, prijs, merk } = req.body;
   const foto = req.file.filename;
@@ -62,7 +62,7 @@ router.post('/add-product', upload.single('foto'), (req, res) => {
   );
 });
 
-// Route voor het ophalen en weergeven van producten op localhost:3000
+// Route voor het ophalen en weergeven van producten 
 router.get('/', (req, res) => {
   db.query('SELECT * FROM producten', (err, result) => {
     if (err) {
@@ -71,12 +71,12 @@ router.get('/', (req, res) => {
       return;
     }
 
-    // Render de product.ejs view en geef de producten door als variabele
+    
     res.render('product', { products: result });
   });
 });
 
-// Toevoegen van de delete-product route op localhost:3000
+// Route voor het verwijderen van producten
 router.post('/delete-product/:id', (req, res) => {
   const productId = req.params.id;
 
@@ -96,7 +96,8 @@ router.post('/delete-product/:id', (req, res) => {
 router.get('/update-product/:id', (req, res) => {
   const productId = req.params.id;
 
-  // Fetch the product based on productId from the database
+
+  
   db.query('SELECT * FROM producten WHERE id = ?', [productId], (err, result) => {
     if (err) {
       console.error('Error fetching product for update:', err);
@@ -104,7 +105,7 @@ router.get('/update-product/:id', (req, res) => {
       return;
     }
 
-    // Fetch categories for dropdown
+
     db.query('SELECT * FROM categories', (err, categories) => {
       if (err) {
         console.error('Error fetching categories:', err);
@@ -112,7 +113,6 @@ router.get('/update-product/:id', (req, res) => {
         return;
       }
 
-      // Render the product-update.ejs view and pass the product and categories as variables
       res.render('product-update', { product: result[0], categories });
     });
   });
@@ -135,7 +135,7 @@ router.post('/update-product/:id', upload.single('foto'), (req, res) => {
         return;
       }
 
-      foto = result[0].foto; // Gebruik de oude foto
+      foto = result[0].foto; 
       updateProduct(productId, naam, prijs, merk, foto, category, res);
     });
   } else {
@@ -143,6 +143,7 @@ router.post('/update-product/:id', upload.single('foto'), (req, res) => {
     updateProduct(productId, naam, prijs, merk, foto, category, res);
   }
 });
+
 
 function updateProduct(id, naam, prijs, merk, foto, category, res) {
   db.query(
