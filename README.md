@@ -2,15 +2,9 @@
 
 ## Overview
 
-Dit Node.js-project is een webapplicatie die basisfunctionaliteiten demonstreert zoals CRUD-operaties, datavalidatie en server-side rendering met EJS templates. Het dient als een voorbeeld voor het ontwikkelen van webapplicaties met een focus op backend functionaliteiten.
+Dit Node.js-project is een webapplicatie die basisfunctionaliteiten demonstreert zoals CRUD-operaties, datavalidatie en server-side rendering met EJS templates. 
 
-## Features
-
-- CRUD-interface voor twee entiteiten zoals producten en categorieën.
-- Inputvalidatie voor formulieren.
-- Paginatie en zoekfunctionaliteit.
-- Server-side rendering met EJS.
-
+Het project is een webshop gefocust op de verkoop van mechanische toetsenborden. Deze shop legt de nadruk op het admin gedeelte, waar admins de mogelijkheid hebben om producten en categorieën toe te voegen, bij te werken en te verwijderen. Bovendien biedt de webshop functionaliteit om producten te sorteren op basis van hun categorie.
 
 ## Prerequisites
 - Node.js
