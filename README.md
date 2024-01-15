@@ -32,7 +32,7 @@ Het project is een webshop gefocust op de verkoop van mechanische toetsenborden.
 
 ## Sources
 
-De bronnen vind je terug op de website zelf.
+De bronnen vind je terug op de website.
 
 ## Licensing
 
