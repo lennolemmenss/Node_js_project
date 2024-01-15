@@ -29,6 +29,11 @@ Het project is een webshop gefocust op de verkoop van mechanische toetsenborden.
 
 1. Start de server met `npm run start` of `node index.js`.
 2. Surf naar http://localhost:3000 in je webbrowser.
+
+## Sources
+
+De bronnen vind je terug op de website zelf.
+
 ## Licensing
 
 The code in this project is licensed under [LENNO-LEMMENS].
