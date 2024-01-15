@@ -1,8 +1,6 @@
-
 // db.js 
 
 const mysql = require('mysql');
-
 
 // Aanpassen naar eigen gewenste database 
 const db = mysql.createConnection({
