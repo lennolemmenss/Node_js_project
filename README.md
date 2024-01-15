@@ -14,7 +14,7 @@ Het project is een webshop gefocust op de verkoop van mechanische toetsenborden.
 ## Installation
 
 1. Kloon de repository naar je lokale machine.
-2. Ga naar de projectmap en voer npm install uit om de afhankelijkheden te installeren.
+2. Ga naar de projectmap en voer `npm install` uit om de afhankelijkheden te installeren.
 
 ## Database Setup
 
