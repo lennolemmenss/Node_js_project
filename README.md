@@ -23,7 +23,7 @@ Het project is een webshop gefocust op de verkoop van mechanische toetsenborden.
 
 ## Seeding the Database
 
-1.  Run `node seeder.js`, om je database te vullen met dummy data.
+1.  Run `cd src && node seeder.js`, om je database te vullen met dummy data.
 
 ## Running the Application
 
