@@ -19,8 +19,8 @@ Dit Node.js-project is een webapplicatie die basisfunctionaliteiten demonstreert
 
 ## Installation
 
-1.Kloon de repository naar je lokale machine.
-2.Ga naar de projectmap en voer npm install uit om de afhankelijkheden te installeren.
+1. Kloon de repository naar je lokale machine.
+2. Ga naar de projectmap en voer npm install uit om de afhankelijkheden te installeren.
 
 ## Database Setup
 
